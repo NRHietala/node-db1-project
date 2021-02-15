@@ -4,7 +4,9 @@ const getAll = () => {
   return db("accounts");
 };
 
-const getById = id => {};
+const getById = id => {
+  return db("accounts").where("id", id).first();
+};
 
 const insert = data => {};
 

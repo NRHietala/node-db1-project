@@ -11,4 +11,26 @@ router.get("/", (req, res) => {
     });
 });
 
+router.get("/:id", (req, res) => {
+  Account.getById(req.params.id)
+    .then(acc => res.status(200).json(acc))
+    .catch(err => {
+      console.log(err);
+    });
+});
+
+router.post("/", (req, res) => {
+  Account.insert(req.body)
+    .then(acc => res.status(200).json(acc))
+    .catch(error => console.log(error));
+});
+
+router.use((error, req, res, next) => {
+  res.status(500).json({
+    info: "Error occurred inside accountsRouter",
+    message: error.message,
+    stack: error.stack,
+  });
+});
+
 module.exports = router;
