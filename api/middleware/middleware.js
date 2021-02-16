@@ -4,7 +4,7 @@ async function validateId(req, res, next) {
   try {
     const user = await Account.get(req.params.id);
     if (user) {
-      req.user = user;
+      req.params.id = id;
       next();
     } else {
       res.status(404).json(`Account with id: ${req.params.id} not found`);

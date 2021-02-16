@@ -15,9 +15,10 @@ router.get("/", async (req, res, next) => {
 });
 
 router.get("/:id", validateId, async (req, res, next) => {
-  const { id } = req.params;
   try {
+    const { id } = req.params;
     const data = await Account.getById(id);
+    console.log("working");
     res.json(data);
   } catch (error) {
     next(error);
