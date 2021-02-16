@@ -4,15 +4,36 @@ const getAll = () => {
   return db("accounts");
 };
 
-function getById(id) {
+const getById = id => {
   return db("accounts").where("id", id).first();
-}
+};
 
-const insert = data => {};
+const insert = data => {
+  return db("accounts")
+    .insert(data)
+    .then(([id]) => {
+      return db("accounts").where("id", id).first();
+    });
+};
 
-const update = () => {};
+const update = (id, changes) => {
+  const updateId = id;
+  return db("accounts")
+    .where("id", id)
+    .update(changes)
+    .then(() => {
+      return db("accounts").where("id", updateId).first();
+    });
+};
 
-const remove = () => {};
+const remove = id => {
+  return db("accounts")
+    .where("id", id)
+    .del()
+    .then(() => {
+      return db("accounts");
+    });
+};
 
 module.exports = {
   getAll,

@@ -16,7 +16,7 @@ async function validateId(req, res, next) {
 function validateBody(req, res, next) {
   const { name, budget } = req.body;
 
-  if (!name || !budget) {
+  if (name && budget) {
     next();
   } else {
     res.status(400).json({ message: "Missing required field" });
