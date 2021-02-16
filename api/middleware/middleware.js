@@ -2,9 +2,8 @@ const Account = require("../accounts/accounts-model");
 
 async function validateId(req, res, next) {
   try {
-    const user = await Account.get(req.params.id);
-    if (user) {
-      req.params.id = id;
+    const id = await Account.getById(req.params.id);
+    if (id) {
       next();
     } else {
       res.status(404).json(`Account with id: ${req.params.id} not found`);

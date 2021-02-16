@@ -18,7 +18,7 @@ router.get("/:id", validateId, async (req, res, next) => {
   try {
     const { id } = req.params;
     const data = await Account.getById(id);
-    console.log("working");
+    console.log(data);
     res.json(data);
   } catch (error) {
     next(error);
@@ -30,6 +30,10 @@ router.post("/", (req, res) => {
     .then(acc => res.status(200).json(acc))
     .catch(error => console.log(error));
 });
+
+router.put("/:id", (req, res, next) => {});
+
+router.delete("/:id"), (req, res, next) => {};
 
 router.use((error, req, res, next) => {
   res.status(500).json({
