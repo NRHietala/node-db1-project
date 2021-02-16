@@ -14,7 +14,7 @@ exports.seed = function (knex, Promise) {
         { name: 'account-10', budget: 19.56 },
         { name: 'account-11', budget: 19.91 },
         { name: 'account-12', budget: 7080.00 },
-        { name: 'account-13', budget: 1234.00},
+        { name: 'account-13', budget: 1234.00 },
       ]);
     });
 };
