@@ -3,20 +3,25 @@ const Account = require("./accounts-model");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  Account.getAll()
-    .then(acc => res.status(200).json(acc))
-    .catch(err => {
-      console.log(err);
-    });
+const { validateId, validateBody } = require("../middleware/middleware");
+
+router.get("/", async (req, res, next) => {
+  try {
+    const data = await Account.getAll();
+    res.json(data);
+  } catch (error) {
+    next(error);
+  }
 });
 
-router.get("/:id", (req, res) => {
-  Account.getById(req.params.id)
-    .then(acc => res.status(200).json(acc))
-    .catch(err => {
-      console.log(err);
-    });
+router.get("/:id", validateId, async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const data = await Account.getById(id);
+    res.json(data);
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.post("/", (req, res) => {
